@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Layout, Card } from "tdesign-react";
+import JsonFormat from "./Components/JsonFormat";
+import Header from "./Components/Header";
+import Content from "./Components/Content";
+
+const tools = [
+    {
+        name: "json格式化",
+        Component: <JsonFormat />
+    }
+];
+
+const dtabs = [
+    {
+        value: Date.now() + 2,
+        name: "tab2",
+        Component: <Card>wwwwwwwwwwwwwwwwwwwwwwwwwww</Card>
+    },
+]
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [tabs, setTabs] = React.useState(dtabs);
+    // 删除tab
+    function delTab(opt) {
+        let newTabs = tabs.filter((item, index) => {
+            return item.value !== opt.value;
+        });
+        setTabs(newTabs);
+    }
+
+    return (
+        <Layout>
+            <Header tools={tools} />
+            <Content tabs={tabs} delHandler={delTab} />
+            <Layout.Footer>
+                xxxxxxxxxxxxxxxxxxxx
+            </Layout.Footer>
+        </Layout >
+    );
 }
 
 export default App;
